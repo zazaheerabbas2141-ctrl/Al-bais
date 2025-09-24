@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Al Baise Trading - Coming Soon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+      <link rel="icon" type="image/x-icon" href="/assets/favicon.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            color: #ffffff;
+        }
+        
+        .background-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+        }
+        
+        .bg-image {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+        }
+        
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: -1;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            max-width: 280px;
+            width: 100%;
+            margin-top: 2rem;
+        }
+        
+        .content {
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .typewriter-text {
+            font-size: 3rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            min-height: 4rem;
+        }
+        
+        .progress-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin-bottom: 2rem;
+        }
+        
+        .progress-circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(#f98842 var(--progress), transparent var(--progress));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+        
+        .progress-inner {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.7);
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .message {
+            font-size: 1.2rem;
+            margin-top: 1.5rem;
+            max-width: 500px;
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        @media (max-width: 768px) {
+            .typewriter-text {
+                font-size: 2rem;
+            }
+            
+            .progress-container {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .progress-inner {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .logo {
+                max-width: 150px;
+            }
+            
+            .message {
+                font-size: 1.1rem;
+                padding: 0 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .typewriter-text {
+                font-size: 1.5rem;
+            }
+            
+            .progress-container {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .progress-inner {
+                width: 80px;
+                height: 80px;
+                font-size: 1.2rem;
+            }
+            
+            .logo {
+                max-width: 120px;
+            }
+            
+            .message {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+   
+    <div class="background-container">
+        <div class="bg-image" style="background-image: url('/assets/image1.jpeg');"></div>
+        <div class="bg-image" style="background-image: url('/assets/image2.jpeg');"></div>
+        <div class="bg-image" style="background-image: url('/assets/image3.jpeg');"></div>
+        <div class="bg-image" style="background-image: url('/assets/image4.jpeg');"></div>
+    </div>
+   
+    <div class="overlay"></div>
+    
+    <div class="container">
+      
+        <img src="/assets/al-bais logo.png" alt="Al Baise Trading Logo" class="logo">
+        
+       
+        <div class="content">
+         
+            <h1 class="typewriter-text" id="typewriter"></h1>
+            
+            <div class="progress-container">
+                <div class="progress-circle" id="progress-circle" style="--progress: 0%">
+                    <div class="progress-inner">
+                        <span id="percentage">0%</span>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <p class="message" id="message">We are working on it! We'll be back soon. Please come again and discover our diverse categories.</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+           
+            const typewriterElement = document.getElementById('typewriter');
+            const text = "Coming Soon...";
+            let i = 0;
+            
+            function typeWriter() {
+                if (i < text.length) {
+                    typewriterElement.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 150);
+                }
+            }
+            
+         
+            setTimeout(typeWriter, 500);
+            
+            const progressCircle = document.getElementById('progress-circle');
+            const percentageElement = document.getElementById('percentage');
+            const messageElement = document.getElementById('message');
+            let progress = 0;
+            let messageShown = false;
+            
+            function updateProgress() {
+                if (progress < 30) {
+                    progress += 1;
+                    progressCircle.style.setProperty('--progress', `${progress}%`);
+                    percentageElement.textContent = `${progress}%`;
+                    
+                   
+                    if (progress >= 30 && !messageShown) {
+                        messageShown = true;
+                        messageElement.classList.add('show');
+                    }
+                    
+                    setTimeout(updateProgress, 50);
+                }
+            }
+            
+          
+            setTimeout(updateProgress, 500 + (text.length * 150));
+        });
+    </script>
+</body>
+</html>
