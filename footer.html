@@ -1,0 +1,232 @@
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <!-- Newsletter -->
+  <div class="newsletter">
+    <h2>NEWSLETTER</h2>
+    <p>Be the first to hear about new styles and offers and see how you’ve helped.</p>
+    <form class="newsletter-form">
+      <input type="email" placeholder="Enter your email" required>
+      <button type="submit"><i class="fas fa-envelope"></i></button>
+    </form>
+  </div>
+
+  <hr>
+
+  <!-- Footer main -->
+  <div class="footer-main">
+    <!-- Logo & Address -->
+    <div class="footer-col footer-brand">
+      <img src="al-bais-logo.png" alt="AL-BAIS Logo">
+      <p> Sialkot, Pakistan</p>
+      <p>Email: <a href="mailto:info@albaistrading.com">info@albaistrading.com</a></p>
+      <p>Tel: +92 52 3257273</p>
+      <p>Mobile: +92 331 3241500</p>
+    </div>
+
+    <!-- Information -->
+    <div class="footer-col">
+      <h4>INFORMATION</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Delivery Information</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms & Conditions</a></li>
+        <li><a href="#">Gallery</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Categories -->
+    <div class="footer-col">
+      <h4>OUR CATEGORIES</h4>
+      <ul>
+        <li><a href="#">T-Shirt</a></li>
+        <li><a href="#">Tracksuits</a></li>
+        <li><a href="#">Hoodies</a></li>
+        <li><a href="#">Jackets</a></li>
+        <li><a href="#">Fight Wear</a></li>
+        <li><a href="#">Shorts</a></li>
+        
+        <li><a href="#">Joggers</a></li>
+      </ul>
+    </div>
+
+    <!-- Social / Contact -->
+    <div class="footer-col footer-contact">
+      <h4>FIND US ON</h4>
+      <ul class="social">
+        <li><a href="#"><i class="fab fa-facebook-f"></i> Facebook</a></li>
+        <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+        <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+        <li><a href="#"><i class="fab fa-linkedin-in"></i> Linkedin</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Bottom -->
+  <div class="footer-bottom">
+    <p>Copyright © 2025 <span>AL-BAIS Trading</span>. All rights reserved.</p>
+  </div>
+</footer>
+<style>
+
+.footer {
+  background: #111;
+  color: #ccc;
+  font-family: 'Poppins', sans-serif;
+  padding-top: 50px;
+}
+
+/* Newsletter */
+.newsletter {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 0 20px;
+}
+
+.newsletter h2 {
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.newsletter p {
+  color: #aaa;
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+}
+
+.newsletter-form {
+  display: flex;
+  justify-content: center;
+  max-width: 400px;
+  margin: auto;
+  border: 1px solid #333;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.newsletter-form input {
+  flex: 1;
+  border: none;
+  padding: 10px;
+  background: #1b1b1b;
+  color: #fff;
+  outline: none;
+}
+
+.newsletter-form button {
+  background: #f98842;
+  border: none;
+  color: #fff;
+  padding: 0 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.newsletter-form button:hover {
+  background: #ff9b5f;
+}
+
+/* Footer main */
+.footer-main {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 50px auto 0;
+  padding: 0 20px;
+  gap: 2rem;
+}
+
+.footer-col {
+  flex: 1 1 220px;
+  min-width: 200px;
+}
+
+.footer-col h4 {
+  color: #fff;
+  font-size: 1rem;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-col ul li {
+  margin-bottom: 8px;
+}
+
+.footer-col ul li a {
+  text-decoration: none;
+  color: #bbb;
+  transition: color 0.3s;
+  font-size: 0.95rem;
+}
+
+.footer-col ul li a:hover {
+  color: #f98842;
+}
+
+/* Logo section at start */
+.footer-brand img {
+  height: 70px;
+  margin-bottom: 15px;
+}
+
+.footer-brand p {
+  color: #aaa;
+  font-size: 0.9rem;
+  margin: 4px 0;
+}
+
+.footer-brand a {
+  color: #f98842;
+  text-decoration: none;
+}
+.footer-brand a:hover {
+  color: #fff;
+}
+
+/* Social links */
+.social li {
+  margin-bottom: 8px;
+}
+.social a i {
+  margin-right: 8px;
+  color: #f98842;
+}
+
+/* Bottom */
+.footer-bottom {
+  text-align: center;
+  border-top: 1px solid #222;
+  margin-top: 40px;
+  padding: 15px 10px;
+  font-size: 0.9rem;
+  color: #999;
+}
+.footer-bottom span {
+  color: #f98842;
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .footer-main {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+  .footer-brand img {
+    margin-bottom: 10px;
+  }
+}
+
+
+</style>
