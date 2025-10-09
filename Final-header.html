@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AL-BAIS Trading</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #fff;
+      color: #111;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    /* ===== DARK MODE ===== */
+    body.dark {
+      background: #111;
+      color: #f1f1f1;
+    }
+    body.dark .top-navbar { background: #1a1a1a; border-bottom: 1px solid #333; }
+    body.dark .nav-links a { color: #f1f1f1; }
+    body.dark .nav-links a:hover { color: #f98842; }
+    body.dark .icon-btn { color: #ccc; }
+    body.dark .mobile-menu { background: #1a1a1a; color: #f1f1f1; }
+    body.dark .mobile-menu a { color: #f1f1f1; border-bottom: 1px solid #333; }
+    body.dark .category-bar { background: #000; }
+    body.dark .sub-menu-cat { background: #222; }
+
+    /* ===== HEADER ===== */
+    .top-navbar {
+      background: #fff;
+      border-bottom: 1px solid #eee;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      transition: background 0.3s;
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+      position: relative;
+    }
+    .nav-logo { height: 50px; }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      z-index: 999;
+    }
+    .nav-links li { position: relative; }
+    .nav-links a {
+      text-decoration: none;
+      color: #111;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    .nav-links a:hover { color: #f98842; }
+
+    /* Submenu */
+    .sub-menu {
+      position: absolute;
+      top: 40px;
+      left: 0;
+      background: #111;
+      color: #fff;
+      display: none;
+      flex-direction: column;
+      min-width: 180px;
+      border-radius: 6px;
+      padding: 10px;
+      z-index: 2000;
+    }
+    .sub-menu a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 0.9rem;
+      padding: 6px 0;
+    }
+    .sub-menu a:hover { color: #f98842; }
+    .nav-links li:hover .sub-menu { display: flex; }
+
+    /* Controls */
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      position: relative;
+    }
+
+    .icon-btn {
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: #888;
+      transition: color 0.3s ease;
+    }
+    .icon-btn:hover { color: #f98842; }
+
+    /* Search bar animation */
+    .search-container {
+      position: absolute;
+      right: 60px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      transition: width 0.3s ease;
+      overflow: hidden;
+      width: 0;
+    }
+    .search-container input {
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      padding: 8px 15px; /* Increased padding for more space */
+      outline: none;
+      width: 180px;
+    }
+    .search-container.show {
+      width: 220px; /* Slightly increased width */
+    }
+
+    /* Burger Menu */
+    #mobile-menu-toggle { display: none; }
+    .burger-icon {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      cursor: pointer;
+      z-index: 1001;
+    }
+    .burger-icon span {
+      width: 25px;
+      height: 3px;
+      background: #f98842;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+    #mobile-menu-toggle:checked + label.burger-icon span:nth-child(1) {
+      transform: rotate(45deg) translateY(8px);
+    }
+    #mobile-menu-toggle:checked + label.burger-icon span:nth-child(2) {
+      opacity: 0;
+    }
+    #mobile-menu-toggle:checked + label.burger-icon span:nth-child(3) {
+      transform: rotate(-45deg) translateY(-8px);
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0; left: -100%;
+      width: 280px;
+      height: 100vh;
+      background: #fff;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+      flex-direction: column;
+      padding: 4rem 2rem;
+      transition: left 0.3s ease;
+      overflow-y: auto;
+      z-index: 999;
+    }
+    #mobile-menu-toggle:checked ~ .mobile-menu { display: flex; left: 0; }
+
+    .mobile-menu a {
+      text-decoration: none;
+      color: #111;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid #eee;
+    }
+    .mobile-menu strong {
+      margin-top: 1rem;
+      font-size: 1.1rem;
+    }
+    .mobile-category {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 0;
+      cursor: pointer;
+      border-bottom: 1px solid #f1f1f1;
+    }
+    .mobile-category i { color: #f98842; }
+    .mobile-submenu {
+      display: none;
+      flex-direction: column;
+      margin-left: 15px;
+      border-left: 2px solid #f1f1f1;
+    }
+    .mobile-category.active + .mobile-submenu { display: flex; }
+    .mobile-submenu a::after {
+      content: "›";
+      color: #f98842;
+      margin-left: 8px;
+    }
+    .mobile-menu-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.4);
+      z-index: 998;
+    }
+    #mobile-menu-toggle:checked ~ .mobile-menu-overlay { display: block; }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .burger-icon { display: flex; }
+    }
+
+    /* ===== CATEGORY SLIDER ===== */
+    .category-bar {
+      position: relative;
+      width: 100%;
+      background: #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 0;
+      z-index: 1001;
+    }
+
+    .cat-slider-wrapper {
+      width: 85%;
+      overflow: visible;
+      position: relative;
+    }
+    .cat-slider {
+      display: flex;
+      gap: 30px;
+      transition: transform 0.5s ease;
+    }
+    .cat-item {
+      position: relative;
+      flex: 0 0 calc(20% - 24px);
+      text-align: center;
+    }
+    .cat-item > a {
+      color: #f1f1f1;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      letter-spacing: 0.5px;
+      font-size: 0.95rem;
+      display: inline-block;
+      padding: 5px 0;
+    }
+    .cat-item > a:hover { color: #f98842; }
+
+    /* Down arrow indicator */
+    .cat-item > a i {
+      margin-left: 5px;
+      font-size: 0.7rem;
+    }
+
+    .sub-menu-cat {
+      position: absolute;
+      top: 35px;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background: #111;
+      border-radius: 6px;
+      padding: 10px 15px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+      min-width: 180px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 2000;
+    }
+    .cat-item:hover .sub-menu-cat {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+    .sub-menu-cat a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 0.9rem;
+      padding: 5px 0;
+      transition: color 0.3s;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .sub-menu-cat a::after {
+      content: "›";
+      color: #f98842;
+      font-size: 0.8rem;
+    }
+    .sub-menu-cat a:hover { color: #f98842; }
+
+    .cat-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #000;
+      color: #fff;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 50%;
+      z-index: 10;
+      transition: background 0.3s ease;
+    }
+    .cat-btn:hover { background: #f98842; }
+    .cat-btn.prev { left: 10px; }
+    .cat-btn.next { right: 10px; }
+    @media (max-width: 768px) {
+      .category-bar { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="top-navbar">
+    <div class="nav-container">
+      <input type="checkbox" id="mobile-menu-toggle">
+      <label for="mobile-menu-toggle" class="burger-icon">
+        <span></span><span></span><span></span>
+      </label>
+
+      <img src="al-bais logo.png" class="nav-logo" alt="logo">
+
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Our Company</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+
+      <div class="nav-controls">
+        <button class="icon-btn" id="search-toggle"><i class="fas fa-search"></i></button>
+        <div class="search-container" id="search-box">
+          <input type="text" placeholder="Search...">
+        </div>
+        <button class="icon-btn"><i class="fas fa-globe"></i></button>
+        <button class="icon-btn" id="theme-toggle"><i class="fas fa-moon"></i></button>
+      </div>
+
+      <div class="mobile-menu-overlay"></div>
+
+      <div class="mobile-menu">
+        <a href="#">Home</a>
+        <a href="#">Our Company</a>
+
+        <strong>Categories</strong>
+        <div class="mobile-category">T-Shirts <i class="fas fa-chevron-down"></i></div>
+        <div class="mobile-submenu">
+          <a href="#">Training T-Shirts</a>
+          <a href="#">Polo Shirts</a>
+          <a href="#">Dry Fit</a>
+        </div>
+
+        <div class="mobile-category">Tracksuits <i class="fas fa-chevron-down"></i></div>
+        <div class="mobile-submenu">
+          <a href="#">Full Zip</a>
+          <a href="#">Half Zip</a>
+        </div>
+
+        <div class="mobile-category">Hoodies <i class="fas fa-chevron-down"></i></div>
+        <div class="mobile-submenu">
+          <a href="#">Pullover</a>
+          <a href="#">Zipper</a>
+        </div>
+
+        <a href="#">Blog</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== CATEGORY SLIDER ===== -->
+  <section class="category-bar">
+    <button class="cat-btn prev">&#10094;</button>
+
+    <div class="cat-slider-wrapper">
+      <div class="cat-slider">
+        <div class="cat-item">
+          <a href="#">T-Shirts <i class="fas fa-angle-down"></i></a>
+          <div class="sub-menu-cat">
+            <a href="#">Training T-Shirts</a>
+            <a href="#">Polo Shirts</a>
+            <a href="#">Graphic Tees</a>
+            <a href="#">Dry Fit</a>
+          </div>
+        </div>
+
+        <div class="cat-item">
+          <a href="#">Tracksuits <i class="fas fa-angle-down"></i></a>
+          <div class="sub-menu-cat">
+            <a href="#">Full Zip</a>
+            <a href="#">Half Zip</a>
+            <a href="#">Team Sets</a>
+          </div>
+        </div>
+
+        <div class="cat-item">
+          <a href="#">Hoodies <i class="fas fa-angle-down"></i></a>
+          <div class="sub-menu-cat">
+            <a href="#">Pullover</a>
+            <a href="#">Zipper</a>
+          </div>
+        </div>
+
+        <div class="cat-item">
+          <a href="#">Jackets <i class="fas fa-angle-down"></i></a>
+          <div class="sub-menu-cat">
+            <a href="#">Windbreaker</a>
+            <a href="#">Bomber</a>
+          </div>
+        </div>
+
+        <div class="cat-item">
+          <a href="#">Shorts <i class="fas fa-angle-down"></i></a>
+          <div class="sub-menu-cat">
+            <a href="#">Training Shorts</a>
+            <a href="#">Casual Shorts</a>
+          </div>
+        </div>
+
+        <div class="cat-item">
+          <a href="#">Joggers <i class="fas fa-angle-down"></i></a>
+          <div class="sub-menu-cat">
+            <a href="#">Running</a>
+            <a href="#">Slim Fit</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="cat-btn next">&#10095;</button>
+  </section>
+
+  <script>
+    // 🌙 Theme Toggle
+    const themeBtn = document.getElementById("theme-toggle");
+    const icon = themeBtn.querySelector("i");
+    themeBtn.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      icon.classList.toggle("fa-sun");
+      icon.classList.toggle("fa-moon");
+    });
+
+    // 🔍 Search animation
+    const searchBtn = document.getElementById("search-toggle");
+    const searchBox = document.getElementById("search-box");
+    searchBtn.addEventListener("click", () => {
+      searchBox.classList.toggle("show");
+    });
+
+    // 📱 Mobile submenu toggle
+    document.querySelectorAll(".mobile-category").forEach(cat => {
+      cat.addEventListener("click", () => {
+        cat.classList.toggle("active");
+      });
+    });
+
+    // ➡️ Category Slider
+    const slider = document.querySelector(".cat-slider");
+    const items = document.querySelectorAll(".cat-item");
+    const next = document.querySelector(".cat-btn.next");
+    const prev = document.querySelector(".cat-btn.prev");
+
+    let index = 0;
+    const visibleCount = 5;
+
+    function updateSlider() {
+      if (!items.length) return;
+      const itemWidth = items[0].offsetWidth + 30;
+      slider.style.transform = `translateX(-${index * itemWidth}px)`;
+    }
+
+    next.addEventListener("click", () => {
+      if (index < items.length - visibleCount) {
+        index++;
+        updateSlider();
+      }
+    });
+
+    prev.addEventListener("click", () => {
+      if (index > 0) {
+        index--;
+        updateSlider();
+      }
+    });
+
+    window.addEventListener("resize", updateSlider);
+  </script>
+</body>
+</html>
