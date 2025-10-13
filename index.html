@@ -1,262 +1,1281 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AL BAIS | Sportswear Overlap Scroll</title>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Al Baise Trading - Coming Soon</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-      <link rel="icon" type="image/x-icon" href="/assets/favicon.png">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Poppins', sans-serif;
-            height: 100vh;
-            overflow: hidden;
-            position: relative;
-            color: #ffffff;
-        }
-        
-        .background-container {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
-        }
-        
-        .bg-image {
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            opacity: 0.15;
-        }
-        
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            z-index: -1;
-        }
-        
-        .container {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            height: 100%;
-            padding: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .logo {
-            max-width: 280px;
-            width: 100%;
-            margin-top: 2rem;
-        }
-        
-        .content {
-            text-align: center;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .typewriter-text {
-            font-size: 3rem;
-            font-weight: 600;
-            margin-bottom: 2rem;
-            min-height: 4rem;
-        }
-        
-        .progress-container {
-            position: relative;
-            width: 150px;
-            height: 150px;
-            margin-bottom: 2rem;
-        }
-        
-        .progress-circle {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: conic-gradient(#f98842 var(--progress), transparent var(--progress));
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: background 0.3s ease;
-        }
-        
-        .progress-inner {
-            position: absolute;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 130px;
-            height: 130px;
-            border-radius: 50%;
-            background: rgba(0, 0, 0, 0.7);
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-        
-        .message {
-            font-size: 1.2rem;
-            margin-top: 1.5rem;
-            max-width: 500px;
-            line-height: 1.6;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-        
-        .message.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        @media (max-width: 768px) {
-            .typewriter-text {
-                font-size: 2rem;
-            }
-            
-            .progress-container {
-                width: 120px;
-                height: 120px;
-            }
-            
-            .progress-inner {
-                width: 100px;
-                height: 100px;
-            }
-            
-            .logo {
-                max-width: 150px;
-            }
-            
-            .message {
-                font-size: 1.1rem;
-                padding: 0 1rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .typewriter-text {
-                font-size: 1.5rem;
-            }
-            
-            .progress-container {
-                width: 100px;
-                height: 100px;
-            }
-            
-            .progress-inner {
-                width: 80px;
-                height: 80px;
-                font-size: 1.2rem;
-            }
-            
-            .logo {
-                max-width: 120px;
-            }
-            
-            .message {
-                font-size: 1rem;
-            }
-        }
-    </style>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/footer.css">
+
+ 
 </head>
-<body>
-   
-    <div class="background-container">
-        <div class="bg-image" style="background-image: url('/assets/image1.jpeg');"></div>
-        <div class="bg-image" style="background-image: url('/assets/image2.jpeg');"></div>
-        <div class="bg-image" style="background-image: url('/assets/image3.jpeg');"></div>
-        <div class="bg-image" style="background-image: url('/assets/image4.jpeg');"></div>
-    </div>
-   
-    <div class="overlay"></div>
-    
-    <div class="container">
-      
-        <img src="/assets/al-bais logo.png" alt="Al Baise Trading Logo" class="logo">
-        
-       
-        <div class="content">
-         
-            <h1 class="typewriter-text" id="typewriter"></h1>
-            
-            <div class="progress-container">
-                <div class="progress-circle" id="progress-circle" style="--progress: 0%">
-                    <div class="progress-inner">
-                        <span id="percentage">0%</span>
-                    </div>
-                </div>
-            </div>
-            
-            
-            <p class="message" id="message">We are working on it! We'll be back soon. Please come again and discover our diverse categories.</p>
+
+<body>  
+
+   <header class="top-navbar">
+    <div class="nav-container">
+      <input type="checkbox" id="mobile-menu-toggle">
+      <label for="mobile-menu-toggle" class="burger-icon">
+        <span></span><span></span><span></span>
+      </label>
+
+      <img src="al-bais logo.png" class="nav-logo" alt="logo">
+
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Our Company</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+
+      <div class="nav-controls">
+        <button class="icon-btn" id="search-toggle"><i class="fas fa-search"></i></button>
+        <div class="search-container" id="search-box">
+          <input type="text" placeholder="Search...">
         </div>
+        <button class="icon-btn"><i class="fas fa-globe"></i></button>
+        <button class="icon-btn" id="theme-toggle"><i class="fas fa-moon"></i></button>
+      </div>
+
+      <div class="mobile-menu-overlay"></div>
+
+      <div class="mobile-menu">
+        <a href="#">Home</a>
+        <a href="#">Our Company</a>
+
+        <strong>Categories</strong>
+        <div class="mobile-category">Sports wears <i class="fas fa-chevron-down"></i></div>
+        <div class="mobile-submenu">
+          <a href="#">American Football Uniforms</a>
+            <a href="#">Baseball Uniforms</a>
+            <a href="#">Basketball Uniforms</a>
+            <a href="#">Cycling Uniforms</a>
+            <a href="#">Ice Hockey Uniforms</a>
+            <a href="#">Men's Polo Shirts</a>
+            <a href="#">Men Singlet</a>
+            <a href="#">Men's T-Shirts</a>
+            <a href="#">Netball Uniforms</a>
+            <a href="#">Rugby Uniforms</a>
+            <a href="#">Scoccer Uniforms</a>
+        </div>
+
+        <div class="mobile-category">Casual wears <i class="fas fa-chevron-down"></i></div>
+        <div class="mobile-submenu">
+          <a href="#">Bubble Jackets</a>
+            <a href="#">Jeans Jackets</a>
+            <a href="#">Jeans pants</a>
+            <a href="#">Men Hoodies</a>
+            <a href="#">Men polo shirts</a>
+            <a href="#">Men Softshell Jackets</a>
+            <a href="#">Men summer sets</a>
+            <a href="#">Men sweatshirts</a>
+            <a href="#">Men Tracksuits</a>
+            <a href="#">Men Trousers</a>
+            <a href="#">Men T-shirts</a>
+            <a href="#">Puffer Jackets</a>
+        </div>
+
+        <div class="mobile-category">Gym wear <i class="fas fa-chevron-down"></i></div>
+        <div class="mobile-submenu">
+          <a href="#">Bottom wear</a>
+            <a href="#">Deep Cut singlet</a>
+            <a href="#">Elbow Sleeve</a>
+            <a href="#">Fitness Bra</a>
+            <a href="#">Gym Shorts</a>
+            <a href="#">Gym Gloves</a>
+            <a href="#">Leggings for Women</a>
+            <a href="#">Men Tank Tops</a>
+        </div>
+
+        <div class="mobile-category">Leather wears <i class="fas fa-chevron-down"></i></div>
+        <div class="mobile-submenu">
+          <a href="#">Leather Jackets</a>
+            <a href="#">Leather Vests</a>
+            <a href="#">Leather Gloves</a>
+            <a href="#">Leather Bags</a>
+            <a href="#">Leather Belts</a>
+            <a href="#">Leather Accessories</a>
+        </div>
+
+        <div class="mobile-category">Sports goods <i class="fas fa-chevron-down"></i></div>
+        <div class="mobile-submenu">
+          <a href="#">Bedminton</a>
+            <a href="#">Cricktet Bats</a>
+            <a href="#">Football</a>
+            <a href="#">Shipping Rope</a>
+        </div>
+
+        <div class="mobile-category">Stainless Beauty instrument <i class="fas fa-chevron-down"></i></div>
+        <div class="mobile-submenu">
+          <a href="#">Manicure Instruments</a>
+            <a href="#">Pedicure Instruments</a>
+            <a href="#">Nail Clippers</a>
+            <a href="#">Cuticle Pushers</a>
+            <a href="#">Nail Files</a>
+            <a href="#">Tweezers</a>
+            <a href="#">Scissors</a>
+            <a href="#">Eyebrow Trimmers</a>
+        </div>
+
+
+        <div class="mobile-category">Stainless dental instrument <i class="fas fa-chevron-down"></i></div>
+        <div class="mobile-submenu">
+          <a href="#">Diagnostic Instruments</a>
+            <a href="#">Periodontal Instruments</a>
+            <a href="#">Restorative Instruments</a>
+            <a href="#">Endodontic Instruments</a>
+        </div>
+
+
+        <div class="mobile-category">Accessories <i class="fas fa-chevron-down"></i></div>
+        <div class="mobile-submenu">
+          <a href="#">Jewelry</a>
+            <a href="#">Watches</a>
+            <a href="#">Bags</a>
+            <a href="#">Belts</a>
+            <a href="#">Sunglasses</a>
+        </div>
+
+
+        <div class="mobile-category">Handheld Tools <i class="fas fa-chevron-down"></i></div>
+        <div class="mobile-submenu">
+           <a href="#">Striking & Pounding Tools</a>
+            <a href="#">Cutting Tools</a>
+            <a href="#">Screwdrivers</a>
+            <a href="#">Pliers</a>
+        </div>
+
+        <a href="#">Blog</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </header>
+
+
+   <!-- ===== CATEGORY SLIDER ===== -->
+  <section class="category-bar">
+    <button class="cat-btn prev">&#10094;</button>
+
+    <div class="cat-slider-wrapper">
+      <div class="cat-slider">
+        <div class="cat-item">
+          <a href="#">Sports wears <i class="fas fa-angle-down"></i></a>
+          <div class="sub-menu-cat">
+            <a href="#">American Football Uniforms</a>
+            <a href="#">Baseball Uniforms</a>
+            <a href="#">Basketball Uniforms</a>
+            <a href="#">Cycling Uniforms</a>
+            <a href="#">Ice Hockey Uniforms</a>
+            <a href="#">Men's Polo Shirts</a>
+            <a href="#">Men Singlet</a>
+            <a href="#">Men's T-Shirts</a>
+            <a href="#">Netball Uniforms</a>
+            <a href="#">Rugby Uniforms</a>
+            <a href="#">Scoccer Uniforms</a>
+            
+
+          </div>
+        </div>
+
+        <div class="cat-item">
+          <a href="#">Casual wears <i class="fas fa-angle-down"></i></a>
+          <div class="sub-menu-cat">
+            <a href="#">Bubble Jackets</a>
+            <a href="#">Jeans Jackets</a>
+            <a href="#">Jeans pants</a>
+            <a href="#">Men Hoodies</a>
+            <a href="#">Men polo shirts</a>
+            <a href="#">Men Softshell Jackets</a>
+            <a href="#">Men summer sets</a>
+            <a href="#">Men sweatshirts</a>
+            <a href="#">Men Tracksuits</a>
+            <a href="#">Men Trousers</a>
+            <a href="#">Men T-shirts</a>
+            <a href="#">Puffer Jackets</a>
+
+          </div>
+        </div>
+
+        <div class="cat-item">
+          <a href="#">Gym wear <i class="fas fa-angle-down"></i></a>
+          <div class="sub-menu-cat">
+            <a href="#">Bottom wear</a>
+            <a href="#">Deep Cut singlet</a>
+            <a href="#">Elbow Sleeve</a>
+            <a href="#">Fitness Bra</a>
+            <a href="#">Gym Shorts</a>
+            <a href="#">Gym Gloves</a>
+            <a href="#">Leggings for Women</a>
+            <a href="#">Men Tank Tops</a>
+          </div>
+        </div>
+
+        <div class="cat-item">
+          <a href="#">Leather wears <i class="fas fa-angle-down"></i></a>
+          <div class="sub-menu-cat">
+            <a href="#">Leather Jackets</a>
+            <a href="#">Leather Vests</a>
+            <a href="#">Leather Gloves</a>
+            <a href="#">Leather Bags</a>
+            <a href="#">Leather Belts</a>
+            <a href="#">Leather Accessories</a>
+
+          </div>
+        </div>
+
+        <div class="cat-item">
+          <a href="#">Sports goods <i class="fas fa-angle-down"></i></a>
+          <div class="sub-menu-cat">
+            <a href="#">Bedminton</a>
+            <a href="#">Cricktet Bats</a>
+            <a href="#">Football</a>
+            <a href="#">Shipping Rope</a>
+          </div>
+        </div>
+
+        <div class="cat-item">
+          <a href="#">Stainless Beauty instrument  <i class="fas fa-angle-down"></i></a>
+          <div class="sub-menu-cat">
+            <a href="#">Manicure Instruments</a>
+            <a href="#">Pedicure Instruments</a>
+            <a href="#">Nail Clippers</a>
+            <a href="#">Cuticle Pushers</a>
+            <a href="#">Nail Files</a>
+            <a href="#">Tweezers</a>
+            <a href="#">Scissors</a>
+            <a href="#">Eyebrow Trimmers</a>
+            
+          </div>
+        </div>
+
+        <div class="cat-item">
+          <a href="#">Stainless dental instrument  <i class="fas fa-angle-down"></i></a>
+          <div class="sub-menu-cat">
+            <a href="#">Diagnostic Instruments</a>
+            <a href="#">Periodontal Instruments</a>
+            <a href="#">Restorative Instruments</a>
+            <a href="#">Endodontic Instruments</a>
+
+          </div>
+        </div>
+
+        <div class="cat-item">
+          <a href="#">Accessories<i class="fas fa-angle-down"></i></a>
+          <div class="sub-menu-cat">
+            <a href="#">Jewelry</a>
+            <a href="#">Watches</a>
+            <a href="#">Bags</a>
+            <a href="#">Belts</a>
+            <a href="#">Sunglasses</a>
+          </div>
+        </div>
+
+        <div class="cat-item">
+          <a href="#">Handheld Tools<i class="fas fa-angle-down"></i></a>
+          <div class="sub-menu-cat">
+            <a href="#">Striking & Pounding Tools</a>
+            <a href="#">Cutting Tools</a>
+            <a href="#">Screwdrivers</a>
+            <a href="#">Pliers</a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+
+    <button class="cat-btn next">&#10095;</button>
+  </section>
+ 
+ 
+  <main>
+
+ <!-- HERO SECTION START -->
+<section class="custom-hero-section">
+  <div class="custom-hero">
+    <!-- ===== Desktop Images ===== -->
+    <img class="desktop" src="IMG/al-bais banner 1.jpg" alt="Desktop 1">
+    <img class="desktop" src="IMG/al-bais banner.jpg" alt="Desktop 2">
+    <img class="desktop" src="IMG/al-bais bannerdf.jpg" alt="Desktop 3">
+
+    <!-- ===== Tablet Images ===== -->
+    <img class="tablet" src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f" alt="Tablet 1">
+    <img class="tablet" src="https://images.unsplash.com/photo-1518770660439-4636190af475" alt="Tablet 2">
+    <img class="tablet" src="https://images.unsplash.com/photo-1581291519195-ef11498d1cf5" alt="Tablet 3">
+
+    <!-- ===== Mobile Images ===== -->
+    <img class="mobile" src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" alt="Mobile 1">
+    <img class="mobile" src="https://images.unsplash.com/photo-1511208569482-5e2ef795ebaa" alt="Mobile 2">
+    <img class="mobile" src="https://images.unsplash.com/photo-1481277542470-605612bd2d61" alt="Mobile 3">
+  </div>
+</section>
+
+<!-- HERO SECTION END -->
+
+
+    <div class="sticky-wrapper">
+
+    
+
+      <div class="sticky-header" id="stickyHeader2">
+        <div class="container">
+          <div>
+            <h2>Sports Wears</h2>
+            <p>High-performance sports apparel designed for comfort, durability, and peak athletic performance.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sticky-header" id="stickyHeader3">
+        <div class="container">
+          <div>
+            <h2>Casual Wears</h2>
+            <p>Stylish everyday outfits blending comfort and modern trends for an effortlessly cool look.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sticky-header" id="stickyHeader4">
+        <div class="container">
+          <div>
+            <h2>Gym Wear</h2>
+            <p>Premium activewear engineered for flexibility, breathability, and maximum workout comfort.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sticky-header" id="stickyHeader4">
+        <div class="container">
+          <div>
+            <h2>Leather Wears</h2>
+            <p>Finely crafted leather jackets, gloves, and accessories combining toughness with timeless style.</p>
+          </div>
+        </div>
+      </div>
+
+       <div class="sticky-header" id="stickyHeader4">
+        <div class="container">
+          <div>
+            <h2>Sports Goods</h2>
+            <p>Top-quality sports equipment built to enhance your training and competitive edge.</p>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="sticky-header" id="stickyHeader4">
+        <div class="container">
+          <div>
+            <h2>Stainless Beauty Instruments</h2>
+            <p>Precision-made stainless tools for professional beauty and grooming applications.</p>
+          </div>
+        </div>
+      </div>
+
+       <div class="sticky-header" id="stickyHeader4">
+        <div class="container">
+          <div>
+            <h2>Stainless Dental Instruments</h2>
+            <p>High-grade stainless dental instruments ensuring accuracy, hygiene, and long-lasting use.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sticky-header" id="stickyHeader4">
+        <div class="container">
+          <div>
+            <h2>Accessories</h2>
+            <p>Complement your look with premium accessories designed to add function and flair.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sticky-header" id="stickyHeader4">
+        <div class="container">
+          <div>
+            <h2>Handheld Tools</h2>
+            <p>Durable and precision-crafted tools designed for reliable performance in every task.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- === Section 1 === -->
+      <section class="slider-section active" id="section1">
+        <div class="container">
+          <div class="slider-header">
+            <div>
+              <h2 class="section-title">Sports Wears</h2>
+              <p class="section-subtitle">High-performance sports apparel designed for comfort, durability, and peak athletic performance.</p>
+            </div>
+            <div class="slider-controls">
+              <button class="prev">‹ </button>
+              <button class="next"> ›</button>
+            </div>
+          </div>
+          <div class="slider-container">
+            <div class="slider-wrapper">
+              <div class="card">
+                <img src="IMG/Sports wear/American football unifoam/american football unifoam (1).jpg"  data-alt="IMG/Sports wear/American football unifoam/american football unifoam (2).jpg">
+                <div class="card-body">
+                  <h5>American Football Uniforms</h5>
+                  <p class="card-text">High-impact uniforms built for strength, comfort, and professional game-day performance.</p>
+      
+                </div>
+              </div>
+              <div class="card">
+                <img src="IMG/Sports wear/Baseball Unifoam/2-32.jpg" data-alt="IMG/Sports wear/Baseball Unifoam/772450db317a2deffb90510559c4a2a8.jpg">
+                <div class="card-body">
+                  <h5>Baseball Uniforms</h5>
+                  <p class="card-text">Classic baseball uniforms combining durability, breathability, and timeless team style.</p>
+                </div>
+              </div>
+              <div class="card">
+                <img src="IMG/Sports wear/Basket Ball unifoam/2-2.jpg" data-alt="IMG/Sports wear/Basket Ball unifoam/4-4.jpg">
+                <div class="card-body">
+                  <h5>Basketball Uniforms</h5>
+                  <p class="card-text">Lightweight, sweat-wicking kits designed for agility and court-ready performance.</p>
+                </div>
+              </div>
+              <div class="card">
+                <img src="IMG/Sports wear/cycling unifoam/cycling unifoam (1).jpg"  data-alt="IMG/Sports wear/cycling unifoam/cycling unifoam (2).jpg">
+                <div class="card-body">
+                  <h5>Cycling Uniforms</h5>
+                  <p class="card-text">Aerodynamic cycling wear crafted for comfort, endurance, and speed on every ride.</p>
+                </div>
+              </div>
+              <div class="card">
+                <img src="IMG/Sports wear/Ice Hockey unifoam/1-11.jpg"  data-alt="IMG/Sports wear/Ice Hockey unifoam/1-12.jpg">
+                <div class="card-body">
+                  <h5>Ice Hockey Uniforms</h5>
+                  <p class="card-text">Premium, insulated hockey gear ensuring protection and flexibility on the ice.</p>
+                </div>
+              </div>
+
+
+              <div class="card">
+                <img src="IMG/Sports wear/Men Polo shirts/MEN POLO SHIRTS (1).jpg"  data-alt="IMG/Sports wear/Men Polo shirts/MEN POLO SHIRTS (2).jpg">
+                <div class="card-body">
+                  <h5>Men's Polo Shirts</h5>
+                  <p class="card-text">Stylish and versatile polos blending sporty elegance with all-day comfort.</p>
+                </div>
+              </div>
+
+
+              <div class="card">
+                <img src="IMG/Sports wear/Men Singlet/men singlet (1).jpg"  data-alt="IMG/Sports wear/Men Singlet/men singlet (1).webp">
+                <div class="card-body">
+                  <h5>Men Singlet</h5>
+                  <p class="card-text">Breathable and stretchable singlets designed for peak workout performance.</p>
+                </div>
+              </div>
+
+
+              <div class="card">
+                <img src="IMG/Sports wear/Men T-Shirt/men t-shirts (1).jpg"  data-alt="IMG/Sports wear/Men T-Shirt/men t-shirts (2).jpg">
+                <div class="card-body">
+                  <h5>Men's T-Shirts</h5>
+                  <p class="card-text">Soft, durable tees perfect for training, casual wear, or team branding.</p>
+                </div>
+              </div>
+
+              <div class="card">
+                <img src="IMG/Sports wear/Netball unifoam/Net Ball uniform (1).jpg"  data-alt="IMG/Sports wear/Netball unifoam/Net Ball uniform (1).png">
+                <div class="card-body">
+                  <h5>Netball Uniforms</h5>
+                  <p class="card-text">Comfort-fit uniforms engineered for movement, style, and on-court confidence.</p>
+                </div>
+              </div>
+
+              <div class="card">
+                <img src="IMG/Sports wear/rugby unifoam/Rugby Unfoam (3).jpg"  data-alt="IMG/Sports wear/rugby unifoam/Rugby Unfoam (4).jpg">
+                <div class="card-body">
+                  <h5>Rugby Uniforms</h5>
+                  <p class="card-text">Rugged, reinforced rugby kits built for endurance and intense gameplay.</p>
+                </div>
+              </div>
+
+
+              <div class="card">
+                <img src="IMG/Sports wear/Soccer Unifoam/soccer unifoam (1).jpg"  data-alt="IMG/Sports wear/Soccer Unifoam/soccer unifoam (2).jpg">
+                <div class="card-body">
+                  <h5>Soccer Uniforms</h5>
+                  <p class="card-text">Lightweight, high-performance soccer kits offering freedom and moisture control.</p>
+                </div>
+              </div>
+              <div class="card view-all-card">
+                <div>
+                  <h5>View All Products</h5>
+                  <a href="#" class="btn btn-outline-light btn-sm">View All</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- === Section 2 === -->
+      <section class="slider-section hidden" id="section2">
+        <div class="container">
+          <div class="slider-header">
+            <div>
+              <h2 class="section-title">Casual Wears</h2>
+              <p class="section-subtitle">Stylish everyday outfits blending comfort and modern trends for an effortlessly cool look.</p>
+            </div>
+            <div class="slider-controls">
+              <button class="prev">‹</button>
+              <button class="next"> ›</button>
+            </div>
+          </div>
+          <div class="slider-container">
+            <div class="slider-wrapper">
+              <div class="card">
+                <img src="IMG/casual wear/Bubble Jacket/Bubble jacket (1) (2).jpg " data-alt="IMG/casual wear/Bubble Jacket/Bubble jacket (1).jpg">
+                <div class="card-body">
+                  <h5>Bubble Jackets</h5>
+                  <p class="card-text">Warm and lightweight jackets offering ultimate insulation and modern street style.</p>
+                </div>
+              </div>
+              <div class="card">
+                <img src="IMG/casual wear/Jeans Jacket/Jean Jackets (1) (2).jpg" data-alt="IMG/casual wear/Jeans Jacket/Jean Jackets (1).jpg">
+                <div class="card-body">
+                  <h5>Jeans Jackets</h5>
+                  <p class="card-text">Classic denim jackets with a modern fit for versatile layering.</p>
+                </div>
+              </div>
+              <div class="card">
+                <img src="IMG/casual wear/Jeans Pantss/Jeans Pant (1).jpg " data-alt="IMG/casual wear/Jeans Pantss/Jeans Pant (3).jpg">
+                <div class="card-body">
+                  <h5>Jeans Pants</h5>
+                  <p class="card-text">Comfortable, rugged jeans designed for everyday wear and long-lasting quality.</p>
+                </div>
+              </div>
+              <div class="card">
+                <img src="IMG/casual wear/Men Hoodie/Men Hooddie (1) (2).jpg " data-alt="IMG/casual wear/Men Hoodie/Men Hooddie (2) (2).jpg ">
+                <div class="card-body">
+                  <h5>Men Hoodies</h5>
+                  <p class="card-text">Soft and cozy hoodies blending sporty comfort with casual versatility.</p>
+                </div>
+              </div>
+              <div class="card">
+                <img src="IMG/casual wear/Men POLO Shirts/Polo shirts (1).jpg " data-alt="IMG/casual wear/Men POLO Shirts/Polo shirts (2).jpg">
+                <div class="card-body">
+                  <h5>Men Polo Shirts</h5>
+                  <p class="card-text">Smart and breathable polos perfect for both active and casual occasions.</p>
+                </div>
+              </div>
+
+              <div class="card">
+                <img src="IMG/casual wear/Men Softshell Jacket/softshell jacket (1).jpg " data-alt="IMG/casual wear/Men Softshell Jacket/softshell jacket (1).webp">
+                <div class="card-body">
+                  <h5>Men Softshell Jackets</h5>
+                  <p class="card-text">Wind-resistant, flexible jackets made for outdoor comfort and performance.</p>
+                </div>
+              </div>
+
+              <div class="card">
+                <img src="IMG/casual wear/Men Summer Ssts/men summer shorts (1) (2).jpg " data-alt="IMG/casual wear/Men Summer Ssts/men summer shorts (2) (2).jpg">
+                <div class="card-body">
+                  <h5>Men Summer Sets</h5>
+                  <p class="card-text">Lightweight, breathable summer outfits designed for relaxed seasonal style.</p>
+                </div>
+              </div>
+
+              <div class="card">
+                <img src="IMG/casual wear/Men Sweat Shirts/Men Sweat shirts (1) (2).jpg " data-alt="IMG/casual wear/Men Sweat Shirts/Men Sweat shirts (1) (3).jpg">
+                <div class="card-body">
+                  <h5>Men Sweatshirts</h5>
+                  <p class="card-text">Comfortable sweatshirts offering warmth and effortless athletic style.</p>
+                </div>
+              </div>
+
+
+               <div class="card">
+                <img src="IMG/casual wear/Men Tracksuits/Men Tracksuits (1) (2).jpg " data-alt="IMG/casual wear/Men Tracksuits/Men Tracksuits (1).jpg">
+                <div class="card-body">
+                  <h5>Men Tracksuits</h5>
+                  <p class="card-text">Stylish and functional tracksuits built for training, travel, or leisure.</p>
+                </div>
+              </div>
+
+
+              <div class="card">
+                <img src="IMG/casual wear/Men Trouser/men trouser (1).jpg " data-alt="IMG/casual wear/Men Trouser/men trouser (2).jpg">
+                <div class="card-body">
+                  <h5>Men Trousers</h5>
+                  <p class="card-text">Tailored trousers combining comfort, style, and everyday practicality.</p>
+                </div>
+              </div>
+
+
+              <div class="card">
+                <img src="IMG/casual wear/Men T-shirts/Men Tshirts (1).jpg " data-alt="IMG/casual wear/Men T-shirts/Men Tshirts (2).jpg">
+                <div class="card-body">
+                  <h5>Men T-Shirts</h5>
+                  <p class="card-text">Premium cotton tees made for all-day comfort and a sporty look.</p>
+                </div>
+              </div>
+
+
+               <div class="card">
+                <img src="IMG/casual wear/Puffer Jacket/Puffer Jacket (1) (2).jpg " data-alt="IMG/casual wear/Puffer Jacket/Puffer Jacket (2) (2).jpg">
+                <div class="card-body">
+                  <h5>Puffer Jackets</h5>
+                  <p class="card-text">Insulated puffer jackets delivering warmth, durability, and bold winter fashion.</p>
+                </div>
+              </div>
+              <div class="card view-all-card">
+                <div>
+                  <h5>View All Products</h5>
+                  <a href="#" class="btn btn-outline-light btn-sm">View All</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- === Section 3 === -->
+      <section class="slider-section hidden" id="section3">
+        <div class="container">
+          <div class="slider-header">
+            <div>
+              <h2 class="section-title">Gym Wear</h2>
+              <p class="section-subtitle">Premium activewear engineered for flexibility, breathability, and maximum workout comfort.</p>
+            </div>
+            <div class="slider-controls">
+              <button class="prev">‹ </button>
+              <button class="next"> ›</button>
+            </div>
+          </div>
+          <div class="slider-container">
+            <div class="slider-wrapper">
+              <div class="card">
+                <img src="IMG/Fitness Wear/Bottom For men/men trouser (1).jpg " data-alt="IMG/Fitness Wear/Bottom For men/men trouser (2).jpg">
+                <div class="card-body">
+                  <h5>Bottom Wear</h5>
+                  <p class="card-text">Flexible and breathable bottoms designed for active performance and comfort.</p>
+                </div>
+              </div>
+              
+              <div class="card">
+                <img src="IMG/Fitness Wear/Deep Cut Singlet/Deep cut singlet (1) (2).jpg " data-alt="IMG/Fitness Wear/Deep Cut Singlet/Deep cut singlet (1).jpg">
+                <div class="card-body">
+                  <h5>Deep Cut Singlets</h5>
+                  <p class="card-text">Lightweight, deep-cut singlets built for intense workouts and maximum mobility.</p>
+                </div>
+              </div>
+              <div class="card">
+                <img src="IMG/Fitness Wear/Elbow sleeve/Elbow sleeve (1) (2).jpg " data-alt="IMG/Fitness Wear/Elbow sleeve/elbow-and-knee-sleeves-for-athletes-pros-and-cons-368168.jpg">
+                <div class="card-body">
+                  <h5>Elbow Sleeves</h5>
+                  <p class="card-text">Supportive elbow sleeves enhancing strength, stability, and joint protection during training.</p>
+                </div>
+              </div>
+              <div class="card">
+                <img src="IMG/Fitness Wear/Fitness Bra/Fitness bra (1) (2).jpg" data-alt="IMG/Fitness Wear/Fitness Bra/Fitness bra (2) (2).jpg">
+                <div class="card-body">
+                  <h5>Fitness Bra</h5>
+                  <p class="card-text">High-support fitness bras combining comfort, style, and superior fit for every workout.</p>
+                </div>
+              </div>
+              <div class="card">
+                <img src="IMG/Fitness Wear/Gym Shorts/Men Shorts (2) (2).jpg " data-alt="IMG/Fitness Wear/Gym Shorts/Men Shorts (2).jpg"  >
+                <div class="card-body">
+                  <h5></h5>Gym Shorts</h5>
+                  <p class="card-text">Stretchable gym shorts offering unrestricted movement and cooling comfort.</p>
+                </div>
+              </div>
+
+
+              <div class="card">
+                <img src="IMG/Fitness Wear/Gym Gloves/Gym Gloves (1).jpg " data-alt="IMG/Fitness Wear/Gym Gloves/Gym Gloves (2).jpg"  >
+                <div class="card-body">
+                  <h5>Gym Gloves</h5>
+                  <p class="card-text">Durable grip gloves designed to protect hands and boost lifting performance.</p>
+                </div>
+              </div>
+
+               <div class="card">
+                <img src=" " data-alt=""  >
+                <div class="card-body">
+                  <h5>Leggings for Women</h5>
+                  <p class="card-text">Form-fitting leggings crafted for flexibility, breathability, and a flattering look.</P>
+                </div>
+              </div>
+
+
+              <div class="card">
+                <img src="IMG/Fitness Wear/Men TankTop/Men tanktop (1).jpg " data-alt="IMG/Fitness Wear/Men TankTop/Men tanktop (2).jpg"  >
+                <div class="card-body">
+                  <h5>Men Tank Tops</h5>
+                  <p class="card-text">Moisture-wicking tank tops built for comfort and athletic performance.</p>
+                </div>
+              </div>
+              <div class="card view-all-card">
+                <div>
+                  <h5>View All Products</h5>
+                  <a href="#" class="btn btn-outline-light btn-sm">View All</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- === Section 4 === -->
+      <section class="slider-section hidden" id="section4">
+        <div class="container">
+          <div class="slider-header">
+            <div>
+              <h2 class="section-title">Leather Wears</h2>
+              <p class="section-subtitle">Finely crafted leather jackets, gloves, and accessories combining toughness with timeless style.</p>  
+            </div>
+            <div class="slider-controls">
+              <button class="prev">‹</button>
+              <button class="next"> ›</button>
+            </div>
+          </div>
+          <div class="slider-container">
+            <div class="slider-wrapper">
+              <div class="card">
+                <img src="">
+                <div class="card-body">
+                  <h5>Leather Jackets</h5>
+                  <p class="card-text">Classic leather jackets crafted for style, durability, and timeless appeal.</p>
+                </div>
+              </div>
+              <div class="card">
+                <img src="">
+                <div class="card-body">
+                  <h5>Leather Vests</h5>
+                  <p class="card-text">Sleek and rugged leather vests offering comfort with a bold statement.</p>
+                </div>
+              </div>
+            
+              <div class="card">
+                <img src="">
+                <div class="card-body">
+                  <h5>Leather Gloves</h5>
+                  <p class="card-text">Premium leather gloves designed for warmth, grip, and refined style.</p>
+                </div>
+              </div>
+              <div class="card">
+                <img src="">
+                <div class="card-body">
+                  <h5>Leather Bags</h5>
+                  <p class="card-text">Handcrafted leather bags combining durability, functionality, and luxury design.</p>
+                </div>
+              </div>
+              <div class="card">
+                <img src="">
+                <div class="card-body">
+                  <h5>Leather Belts</h5>
+                  <p class="card-text">High-quality leather belts built for everyday wear and lasting elegance.</p>
+                </div>
+              </div>
+              <div class="card view-all-card">
+                <div>
+                  <h5>View All Products</h5>
+                  <a href="#" class="btn btn-outline-light btn-sm">View All</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- === Section 5 === -->
+      <section class="slider-section hidden" id="section5">
+        <div class="container">
+          <div class="slider-header">
+            <div>
+              <h2 class="section-title">Sports Goods</h2>
+              <p class="section-subtitle">Top-quality sports equipment built to enhance your training and competitive edge.</p>
+            </div>
+            <div class="slider-controls">
+              <button class="prev">‹</button>
+              <button class="next">›</button>
+            </div>
+          </div>
+          <div class="slider-container">
+            <div class="slider-wrapper">
+              <div class="card">
+                <img src="IMG/Sports goods/Bedminton/Bedminton.jpg" data-alt="IMG/Sports goods/Bedminton/cross minton.jpg">
+                <div class="card-body">
+                  <h5>Badminton Racket</h5>
+                  <p class="card-text">High-quality badminton gear crafted for precision, speed, and control.</p>
+                </div>
+              </div>
+              <div class="card">
+                <img src="IMG/Sports goods/Cricket Bat/TapeBall.jpg " data-alt="IMG/Sports goods/Cricket Bat/hard ball bat.jpg">
+                <div class="card-body">
+                  <h5>Cricket Bats</h5>
+                  <p class="card-text">Durable, perfectly balanced bats designed for power and performance on the pitch.</p>
+                </div>
+              </div>
+              <div class="card">
+                <img src="IMG/Sports goods/football/Hand Ball.jpg " data-alt="IMG/Sports goods/football/machine-Sewn Ball.jpg">
+                <div class="card-body">
+                  <h5>Football</h5>
+                  <p class="card-text">Premium footballs engineered for accuracy, durability, and superior gameplay.</p>
+                </div>
+              </div>
+              <div class="card">
+                <img src="IMG/Sports goods/Skipping Ropes/skipping roap (1) (2).jpg " data-alt="IMG/Sports goods/Skipping Ropes/skipping roap (1).jpg">
+                <div class="card-body">
+                  <h5>Skipping Rope</h5>
+                  <p class="card-text">Lightweight and durable skipping ropes built for speed, endurance, and fitness training.</p>
+                </div>
+              </div>
+              
+              <div class="card view-all-card">
+                <div>
+                  <h5>View All Products</h5>
+                  <a href="#" class="btn btn-outline-light btn-sm">View All</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+        <!-- === Section 6=== -->
+      <section class="slider-section hidden" id="section5">
+        <div class="container">
+          <div class="slider-header">
+            <div>
+              <h2 class="section-title">Stainless Beauty Instruments</h2>
+              <p class="section-subtitle">Precision-made stainless tools for professional beauty and grooming applications.</p>
+            </div>
+            <div class="slider-controls">
+              <button class="prev">‹</button>
+              <button class="next">›</button>
+            </div>
+          </div>
+          <div class="slider-container">
+            <div class="slider-wrapper">
+              <div class="card">
+                <img src="">
+                <div class="card-body">
+                  <h5>Manicure Instruments</h5>
+                  <p class="card-text">High-quality tools crafted for precise and professional nail care.</p>
+                </div>
+              </div>
+              <div class="card">
+                <img src="">
+                <div class="card-body">
+                  <h5>Pedicure Instruments</h5>
+                  <p class="card-text">Durable pedicure tools designed for comfort, hygiene, and smooth results.</p>
+                </div>
+              </div>
+              <div class="card">
+                <img src="">
+                <div class="card-body">
+                  <h5>Nail Clippers</h5>
+                  <p class="card-text">Sharp and sturdy clippers ensuring clean, accurate, and effortless trimming.</p>
+                </div>
+              </div>
+              <div class="card">
+                <img src="">
+                <div class="card-body">
+                  <h5>Cuticle Pushers</h5>
+                  <p class="card-text">Ergonomic cuticle pushers for gentle and effective nail preparation.</p>
+                </div>
+              </div>
+              <div class="card">
+                <img src="">
+                <div class="card-body">
+                  <h5>Nail Files</h5>
+                  <p class="card-text">Smooth-finish nail files made for shaping and refining nails perfectly.</p>
+                </div>
+              </div>
+
+               <div class="card">
+                <img src="">
+                <div class="card-body">
+                  <h5>Tweezers</h5>
+                  <p class="card-text">Precision tweezers designed for accurate hair removal and detailed grooming.</p>
+                </div>
+              </div>
+
+              <div class="card">
+                <img src="">
+                <div class="card-body">
+                  <h5>Scissors</h5>
+                  <p class="card-text">Professional-grade scissors ensuring clean cuts and long-lasting sharpness.</p>
+                </div>
+              </div>
+
+              <div class="card">
+                <img src="">
+                <div class="card-body">
+                  <h5>Eyebrow Trimmers</h5>
+                  <p class="card-text">Compact trimmers offering precise and safe eyebrow shaping.</p>
+                </div>
+              </div>
+              <div class="card view-all-card">
+                <div>
+                  <h5>View All Products</h5>
+                  <a href="#" class="btn btn-outline-light btn-sm">View All</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+       <!-- === Section 7=== -->
+      <section class="slider-section hidden" id="section5">
+        <div class="container">
+          <div class="slider-header">
+            <div>
+              <h2 class="section-title">Stainless Dental Instruments</h2>
+              <p class="section-subtitle">High-grade stainless dental instruments ensuring accuracy, hygiene, and long-lasting use.</p>
+            </div>
+            <div class="slider-controls">
+              <button class="prev">‹</button>
+              <button class="next">›</button>
+            </div>
+          </div>
+          <div class="slider-container">
+            <div class="slider-wrapper">
+              <div class="card">
+                <img src="">
+                <div class="card-body">
+                  <h5>Diagnostic Instruments</h5>
+                  <p class="card-text">Precision tools designed for accurate dental examination and diagnosis.</p>
+                </div>
+              </div>
+              <div class="card">
+                <img src="">
+                <div class="card-body">
+                  <h5>Periodontal Instruments</h5>
+                  <p class="card-text">Specialized instruments crafted for effective gum care and deep cleaning.</p>
+                </div>
+              </div>
+              <div class="card">
+                <img src="">
+                <div class="card-body">
+                  <h5>Restorative Instruments
+                  <p class="card-text">High-quality tools engineered for precise dental restoration and repair.</p>
+                </div>
+              </div>
+              <div class="card">
+                <img src="">
+                <div class="card-body">
+                  <h5>Endodontic Instruments</h5>
+                  <p class="card-text">Advanced instruments designed for efficient and accurate root canal procedures.</p>
+                </div>
+              </div>
+              
+              <div class="card view-all-card">
+                <div>
+                  <h5>View All Products</h5>
+                  <a href="#" class="btn btn-outline-light btn-sm">View All</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+       <!-- === Section 8=== -->
+      <section class="slider-section hidden" id="section5">
+        <div class="container">
+          <div class="slider-header">
+            <div>
+              <h2 class="section-title">Accessories</h2>
+              <p class="section-subtitle">Complement your look with premium accessories designed to add function and flair.</p>
+            </div>
+            <div class="slider-controls">
+              <button class="prev">‹</button>
+              <button class="next">›</button>
+            </div>
+          </div>
+          <div class="slider-container">
+            <div class="slider-wrapper">
+              <div class="card">
+                <img src="">
+                <div class="card-body">
+                  <h5>Jewelry Set</h5>
+                  <p class="card-text">Stylish and timeless jewelry pieces crafted to elevate every look.</p>
+                </div>
+              </div>
+              <div class="card">
+                <img src="">
+                <div class="card-body">
+                  <h5>Watches</h5>
+                  <p class="card-text">Premium watches blending precision, durability, and modern design.</p>
+                </div>
+              </div>
+              <div class="card">
+                <img src="">
+                <div class="card-body">
+                  <h5>Bags</h5>
+                  <p class="card-text">Fashion-forward bags offering functionality with sophisticated style.</p>
+                </div>
+              </div>
+              <div class="card">
+                <img src="">
+                <div class="card-body">
+                  <h5>Belts</h5>
+                  <p class="card-text">High-quality belts designed to complement any outfit with a refined touch.</p>
+                </div>
+              </div>
+              <div class="card">
+                <img src="">
+                <div class="card-body">
+                  <h5>Sunglasses</h5>
+                  <p class="card-text">Trendy and protective sunglasses combining comfort with bold fashion.</p>
+                </div>
+              </div>
+              <div class="card view-all-card">
+                <div>
+                  <h5>View All Products</h5>
+                  <a href="#" class="btn btn-outline-light btn-sm">View All</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+
+
+       <!-- === Section 9=== -->
+      <section class="slider-section hidden" id="section5">
+        <div class="container">
+          <div class="slider-header">
+            <div>
+              <h2 class="section-title">Handheld Tools</h2>
+              <p class="section-subtitle">Durable and precision-crafted tools designed for reliable performance in every task.</p>
+            </div>
+            <div class="slider-controls">
+              <button class="prev">‹</button>
+              <button class="next">›</button>
+            </div>
+          </div>
+          <div class="slider-container">
+            <div class="slider-wrapper">
+              <div class="card">
+                <img src="">
+                <div class="card-body">
+                  <h5>Striking & Pounding Tools</h5>
+                  <p class="card-text">Durable tools engineered for precision impact and heavy-duty performance.</p>
+                </div>
+              </div>
+              <div class="card">
+                <img src="">
+                <div class="card-body">
+                  <h5>Cutting Tools</h5>
+                  <p class="card-text">Sharp, reliable cutting tools designed for clean and accurate results.</p>
+                </div>
+              </div>
+              <div class="card">
+                <img src="">
+                <div class="card-body">
+                  <h5>Screwdrivers</h5>
+                  <p class="card-text">Ergonomic screwdrivers built for grip, control, and lasting efficiency.</p>
+                </div>
+              </div>
+              <div class="card">
+                <img src="https://images.unsplash.com/photo-1594736797933-d0d69e1e50f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80">
+                <div class="card-body">
+                  <h5>Pliers</h5>
+                  <p class="card-text">Strong, versatile pliers crafted for firm grip and precise handling.</p>
+                </div>
+              </div>
+              
+              <div class="card view-all-card">
+                <div>
+                  <h5>View All Products</h5>
+                  <a href="#" class="btn btn-outline-light btn-sm">View All</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-           
-            const typewriterElement = document.getElementById('typewriter');
-            const text = "Coming Soon...";
-            let i = 0;
-            
-            function typeWriter() {
-                if (i < text.length) {
-                    typewriterElement.innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(typeWriter, 150);
-                }
-            }
-            
-         
-            setTimeout(typeWriter, 500);
-            
-            const progressCircle = document.getElementById('progress-circle');
-            const percentageElement = document.getElementById('percentage');
-            const messageElement = document.getElementById('message');
-            let progress = 0;
-            let messageShown = false;
-            
-            function updateProgress() {
-                if (progress < 30) {
-                    progress += 1;
-                    progressCircle.style.setProperty('--progress', `${progress}%`);
-                    percentageElement.textContent = `${progress}%`;
-                    
-                   
-                    if (progress >= 30 && !messageShown) {
-                        messageShown = true;
-                        messageElement.classList.add('show');
-                    }
-                    
-                    setTimeout(updateProgress, 50);
-                }
-            }
-            
-          
-            setTimeout(updateProgress, 500 + (text.length * 150));
-        });
-    </script>
+
+    
+  </main>
+
+  <!-- Testimonial Section  Start-->
+<section class="testimonial-section-pro">
+  <h2>What Clients Say</h2>
+  <div class="line"></div>
+
+  <div class="testimonial-wrapper">
+    <div class="side-wrapper">
+      <img src="https://randomuser.me/api/portraits/women/45.jpg" class="side-image" id="p-prev-img">
+      <div class="side-rating" id="p-prev-rating"><div class="star">⭐</div><span>4</span></div>
+    </div>
+
+    <div class="testimonial-container" id="p-testimonial">
+      <div class="rating-badge"><div class="star">⭐</div><span id="p-rating-value">5</span></div>
+      <img src="https://randomuser.me/api/portraits/men/1.jpg" class="client-photo" id="p-client-photo">
+      <h3 id="p-client-name">Md Nahidul</h3>
+      <p id="p-client-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+      <div class="rating" id="p-rating">⭐⭐⭐⭐⭐</div>
+      <div class="nav-buttons">
+        <span id="p-prev">&#8592;</span>
+        <span id="p-next">&#8594;</span>
+      </div>
+    </div>
+
+    <div class="side-wrapper">
+      <img src="https://randomuser.me/api/portraits/women/68.jpg" class="side-image" id="p-next-img">
+      <div class="side-rating" id="p-next-rating"><div class="star">⭐</div><span>5</span></div>
+    </div>
+  </div>
+  </section>
+  <!-- Testimonial Section  End-->
+
+  <!-- ✅ FAQ Section Start -->
+<section class="faq-section-pro">
+  <div class="faq-container">
+    <h2 class="faq-title">Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Why shouldn't we trust atoms?</span>
+        <span class="faq-icon"></span>
+      </button>
+      <div class="faq-answer">
+        <p>They make up everything.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>What do you call someone with no body and no nose?</span>
+        <span class="faq-icon"></span>
+      </button>
+      <div class="faq-answer">
+        <p>Nobody knows.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>What's the object-oriented way to become wealthy?</span>
+        <span class="faq-icon"></span>
+      </button>
+      <div class="faq-answer">
+        <p>Inheritance.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>How many tickles does it take to tickle an octopus?</span>
+        <span class="faq-icon"></span>
+      </button>
+      <div class="faq-answer">
+        <p>Ten-tickles.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>What is: 1 + 1?</span>
+        <span class="faq-icon"></span>
+      </button>
+      <div class="faq-answer">
+        <p>2, simple math genius!</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ✅ FAQ Section End -->
+
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <!-- Newsletter -->
+  <div class="newsletter">
+    <h2>NEWSLETTER</h2>
+    <p>Be the first to hear about new styles and offers and see how you’ve helped.</p>
+    <form class="newsletter-form">
+      <input type="email" placeholder="Enter your email" required>
+      <button type="submit"><i class="fas fa-envelope"></i></button>
+    </form>
+  </div>
+
+  <hr>
+
+  <!-- Footer main -->
+  <div class="footer-main">
+    <!-- Logo & Address -->
+    <div class="footer-col footer-brand">
+      <img src="al-bais-logo.png" alt="AL-BAIS Logo">
+      <p> Sialkot, Pakistan</p>
+      <p>Email: <a href="mailto:info@albaistrading.com">info@albaistrading.com</a></p>
+      <p>Tel: +92 52 3257273</p>
+      <p>Mobile: +92 331 3241500</p>
+    </div>
+
+    <!-- Information -->
+    <div class="footer-col">
+      <h4>INFORMATION</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Delivery Information</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms & Conditions</a></li>
+        <li><a href="#">Gallery</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Categories -->
+    <div class="footer-col">
+      <h4>OUR CATEGORIES</h4>
+      <ul>
+        <li><a href="#">T-Shirt</a></li>
+        <li><a href="#">Tracksuits</a></li>
+        <li><a href="#">Hoodies</a></li>
+        <li><a href="#">Jackets</a></li>
+        <li><a href="#">Fight Wear</a></li>
+        <li><a href="#">Shorts</a></li>
+        
+        <li><a href="#">Joggers</a></li>
+      </ul>
+    </div>
+
+    <!-- Social / Contact -->
+    <div class="footer-col footer-contact">
+      <h4>FIND US ON</h4>
+      <ul class="social">
+        <li><a href="#"><i class="fab fa-facebook-f"></i> Facebook</a></li>
+        <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+        <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+        <li><a href="#"><i class="fab fa-linkedin-in"></i> Linkedin</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Bottom -->
+  <div class="footer-bottom">
+    <p>Copyright © 2025 <span>AL-BAIS Trading</span>. All rights reserved.</p>
+  </div>
+</footer>
+
+
+  <script src="js/index.js"></script>
+    <script src="js/header.js"></script>
+
 </body>
 </html>
