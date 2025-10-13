@@ -1277,8 +1277,6 @@
   <script src="js/index.js"></script>
     <script src="js/header.js"></script>
 
-</body>
-
 
   <style>
 
@@ -2654,8 +2652,317 @@
     margin-bottom: 10px;
   }
 }
-
-
-
     </style>
+
+
+  <script>
+
+const sections = document.querySelectorAll('.slider-section');
+const stickyHeaders = document.querySelectorAll('.sticky-header');
+const sectionIntervals = new Map();
+
+// === Scroll Overlap Effect ===
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  const totalHeight = document.body.scrollHeight - window.innerHeight;
+  const progress = scrollY / totalHeight;
+  const index = Math.min(Math.floor(progress * sections.length * 1.2), sections.length - 1);
+
+  // Show active section
+  sections.forEach((sec, i) => {
+    const isActive = i === index;
+    sec.classList.toggle('active', isActive);
+    sec.classList.toggle('hidden', !isActive);
+
+    // Auto slide only on active section
+    if (isActive && !sectionIntervals.has(sec)) {
+      startAutoSlide(sec);
+    }
+  });
+
+  // Sticky header control
+  stickyHeaders.forEach((header, i) => {
+    header.classList.toggle('visible', index > i);
+  });
+});
+
+function startAutoSlide(section) {
+  const wrapper = section.querySelector('.slider-wrapper');
+  const cards = section.querySelectorAll('.card');
+  const nextBtn = section.querySelector('.next');
+  const prevBtn = section.querySelector('.prev');
+  const cardWidth = cards[0].offsetWidth + 20;
+  let index = 0;
+  let isAnimating = false;
+
+  // Clone all cards for smooth infinite effect
+  cards.forEach(card => {
+    const clone = card.cloneNode(true);
+    wrapper.appendChild(clone);
+  });
+
+  const totalCards = wrapper.querySelectorAll('.card').length;
+
+  function moveToIndex(i, instant = false) {
+    wrapper.style.transition = instant ? 'none' : 'transform 0.6s ease';
+    wrapper.style.transform = `translateX(-${i * cardWidth}px)`;
+  }
+
+  function nextSlide() {
+    if (isAnimating) return;
+    isAnimating = true;
+    index++;
+    moveToIndex(index);
+    setTimeout(() => {
+      if (index >= totalCards / 2) {
+        index = 0;
+        moveToIndex(index, true);
+      }
+      isAnimating = false;
+    }, 600);
+  }
+
+  function prevSlide() {
+    if (isAnimating) return;
+    isAnimating = true;
+    if (index === 0) {
+      index = totalCards / 2;
+      moveToIndex(index, true);
+    }
+    index--;
+    moveToIndex(index);
+    setTimeout(() => (isAnimating = false), 600);
+  }
+
+  // Button click events
+  nextBtn.addEventListener('click', nextSlide);
+  prevBtn.addEventListener('click', prevSlide);
+
+  // Auto slide (same as next button)
+  const auto = setInterval(nextSlide, 3000);
+  sectionIntervals.set(section, auto);
+}
+
+// Start auto slide for first section
+startAutoSlide(document.querySelector('#section1'));
+
+// === Image Hover Swap ===
+document.querySelectorAll('.card img').forEach(img => {
+  const originalSrc = img.src;
+  const altSrc = img.getAttribute('data-alt');
+  if (!altSrc) return;
+  img.addEventListener('mouseenter', () => (img.src = altSrc));
+  img.addEventListener('mouseleave', () => (img.src = originalSrc));
+});
+
+
+const slides = document.querySelectorAll(".responsive-img");
+let current = 0;
+
+// 🖼 Load correct image for device
+function setResponsiveImages() {
+  const width = window.innerWidth;
+  slides.forEach(img => {
+    if (width <= 576) {
+      img.src = img.dataset.mobile;
+    } else if (width <= 992) {
+      img.src = img.dataset.tablet;
+    } else {
+      img.src = img.dataset.desktop;
+    }
+  });
+}
+
+//  Show specific slide
+function showSlide(index) {
+  slides.forEach((img, i) => {
+    img.classList.remove("active");
+    if (i === index) {
+      img.classList.add("active");
+    }
+  });
+}
+
+//  Auto change images
+function startSlider() {
+  showSlide(current);
+  setInterval(() => {
+    current = (current + 1) % slides.length;
+    showSlide(current);
+  }, 4000);
+}
+
+window.addEventListener("load", () => {
+  setResponsiveImages();
+  startSlider();
+});
+
+window.addEventListener("resize", setResponsiveImages);
+
+
+/* Testimonial section Start*/
+
+   (() => {
+  const section = document.querySelector(".testimonial-section-pro");
+  const testimonials = [
+    { name:"Md Nahidul", text:"Lorem Ipsum is simply dummy text of the printing and typesetting industry.", photo:"https://randomuser.me/api/portraits/men/1.jpg", rating:"⭐⭐⭐⭐⭐", ratingValue:5 },
+    { name:"Sophia Khan", text:"Very professional and easy to work with. Highly recommend their services!", photo:"https://randomuser.me/api/portraits/women/45.jpg", rating:"⭐⭐⭐⭐", ratingValue:4 },
+    { name:"Ava Smith", text:"Excellent experience from start to finish. Great communication and fast delivery!", photo:"https://randomuser.me/api/portraits/women/68.jpg", rating:"⭐⭐⭐⭐⭐", ratingValue:5 },
+  ];
+
+  let index = 0;
+  const photoEl = section.querySelector("#p-client-photo");
+  const nameEl = section.querySelector("#p-client-name");
+  const textEl = section.querySelector("#p-client-text");
+  const ratingEl = section.querySelector("#p-rating");
+  const ratingValue = section.querySelector("#p-rating-value");
+  const prevImg = section.querySelector("#p-prev-img");
+  const nextImg = section.querySelector("#p-next-img");
+  const prevRating = section.querySelector("#p-prev-rating span");
+  const nextRating = section.querySelector("#p-next-rating span");
+  const container = section.querySelector("#p-testimonial");
+
+  function updateTestimonial(fade = true, direction = "right") {
+    if (fade) container.classList.add("fade");
+
+    // Remove old animation class
+    photoEl.classList.remove("animate-in-right", "animate-in-left");
+
+    setTimeout(() => {
+      const t = testimonials[index];
+      photoEl.src = t.photo;
+      nameEl.textContent = t.name;
+      textEl.textContent = t.text;
+      ratingEl.textContent = t.rating;
+      ratingValue.textContent = t.ratingValue;
+
+      const prevIndex = (index - 1 + testimonials.length) % testimonials.length;
+      const nextIndex = (index + 1) % testimonials.length;
+      prevImg.src = testimonials[prevIndex].photo;
+      nextImg.src = testimonials[nextIndex].photo;
+      prevRating.textContent = testimonials[prevIndex].ratingValue;
+      nextRating.textContent = testimonials[nextIndex].ratingValue;
+
+      // Apply slide animation
+      photoEl.classList.add(direction === "right" ? "animate-in-right" : "animate-in-left");
+
+      container.classList.remove("fade");
+    }, fade ? 300 : 0);
+  }
+
+  function nextSlide() {
+    index = (index + 1) % testimonials.length;
+    updateTestimonial(true, "right");
+  }
+
+  function prevSlide() {
+    index = (index - 1 + testimonials.length) % testimonials.length;
+    updateTestimonial(true, "left");
+  }
+
+  section.querySelector("#p-next").addEventListener("click", () => { nextSlide(); resetAuto(); });
+  section.querySelector("#p-prev").addEventListener("click", () => { prevSlide(); resetAuto(); });
+
+  let auto = setInterval(nextSlide, 3000);
+  function resetAuto() {
+    clearInterval(auto);
+    auto = setInterval(nextSlide, 3000);
+  }
+
+  container.addEventListener("mouseenter", () => clearInterval(auto));
+  container.addEventListener("mouseleave", resetAuto);
+
+  let startX = 0;
+  container.addEventListener("touchstart", e => startX = e.touches[0].clientX);
+  container.addEventListener("touchend", e => {
+    const endX = e.changedTouches[0].clientX;
+    if (startX - endX > 50) { nextSlide(); resetAuto(); }
+    else if (endX - startX > 50) { prevSlide(); resetAuto(); }
+  });
+
+  updateTestimonial(false);
+})();
+
+// Testimonial section end
+
+// FAQ Section start
+document.querySelectorAll(".faq-question").forEach(button => {
+  button.addEventListener("click", () => {
+    const item = button.parentElement;
+    const openItem = document.querySelector(".faq-item.active");
+
+    // Close previously open item
+    if (openItem && openItem !== item) {
+      openItem.classList.remove("active");
+    }
+
+    // Toggle current item
+    item.classList.toggle("active");
+  });
+});
+// FAQ Section end
+
+
+
+
+
+
+
+    // 🌙 Theme Toggle
+    const themeBtn = document.getElementById("theme-toggle");
+    const icon = themeBtn.querySelector("i");
+    themeBtn.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      icon.classList.toggle("fa-sun");
+      icon.classList.toggle("fa-moon");
+    });
+
+    // 🔍 Search animation
+    const searchBtn = document.getElementById("search-toggle");
+    const searchBox = document.getElementById("search-box");
+    searchBtn.addEventListener("click", () => {
+      searchBox.classList.toggle("show");
+    });
+
+    // 📱 Mobile submenu toggle
+    document.querySelectorAll(".mobile-category").forEach(cat => {
+      cat.addEventListener("click", () => {
+        cat.classList.toggle("active");
+      });
+    });
+
+    // ➡️ Category Slider
+    const slider = document.querySelector(".cat-slider");
+    const items = document.querySelectorAll(".cat-item");
+    const next = document.querySelector(".cat-btn.next");
+    const prev = document.querySelector(".cat-btn.prev");
+
+    let index = 0;
+    const visibleCount = 5;
+
+    function updateSlider() {
+      if (!items.length) return;
+      const itemWidth = items[0].offsetWidth + 30;
+      slider.style.transform = `translateX(-${index * itemWidth}px)`;
+    }
+
+    next.addEventListener("click", () => {
+      if (index < items.length - visibleCount) {
+        index++;
+        updateSlider();
+      }
+    });
+
+    prev.addEventListener("click", () => {
+      if (index > 0) {
+        index--;
+        updateSlider();
+      }
+    });
+
+    window.addEventListener("resize", updateSlider);
+
+
+  </script>
+  </body>
 </html>
